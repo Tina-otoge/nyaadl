@@ -49,3 +49,5 @@ You can also pass `-s` to use Sukebei instead of the default Nyaa site.
 ```
 pip install nyaadl
 ```
+
+[webtorrent]: https://github.com/webtorrent/webtorrent-cli
