@@ -11,7 +11,7 @@ class MenuItem:
     target: Torrent
 
 
-def ask(l: list[Torrent]):
+def ask(l: list[Torrent], prompt=False):
     l = l[:20]
     items = [MenuItem(
         title=torrent.name,
@@ -24,9 +24,12 @@ def ask(l: list[Torrent]):
         ),
         target=torrent,
     ) for torrent in l]
-    try:
-        result = show_term_menu(items)
-    except Exception:
+    if not prompt:
+        try:
+            result = show_term_menu(items)
+        except Exception:
+            result = simple_term_ask(items)
+    else:
         result = simple_term_ask(items)
     return result
 
@@ -58,16 +61,17 @@ def get_key(i: int):
 
 
 def simple_term_ask(items: list[MenuItem]):
+    items = list(reversed(items))
     size = len(items)
     for index, item in enumerate(items):
-        index += 1
+        index = size - index
         print(index, item.title)
         print('...', item.details.replace('\n', '\n... '))
         print('-' * 20)
     index = input(f'Your choice [1-{size}] > ')
     try:
         index = int(index)
-        index -= 1
+        index = size - index
         if index < 0 or index >= size:
             raise ValueError('Out of range')
     except ValueError:
