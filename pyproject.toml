@@ -2,3 +2,4 @@
 requires = ["setuptools", "setuptools_scm[toml]"]
 
 [tool.setuptools_scm]
+local_scheme = "no-local-version"
