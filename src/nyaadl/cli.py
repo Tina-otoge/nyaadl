@@ -48,7 +48,11 @@ def show_term_menu(items: list[MenuItem]):
         preview_command=str,
         clear_screen=True,
     )
-    index = menu.show()
+    try:
+        index = menu.show()
+    except Exception as e:
+        menu._reset_term()
+        raise e
     if index is None:
         return None
     return items[index].target
