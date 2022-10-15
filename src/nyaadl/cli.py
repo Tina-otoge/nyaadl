@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from simple_term_menu import TerminalMenu
 
 from .nyaa import Torrent
 
@@ -35,6 +34,7 @@ def ask(l: list[Torrent], prompt=False):
 
 
 def show_term_menu(items: list[MenuItem]):
+    from simple_term_menu import TerminalMenu
     cli_items = [
         f'[{get_key(index)}] ' + item.title.replace('|', '\\|') + '|' + (
             item.details.replace('|', '\\|')
